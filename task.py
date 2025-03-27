@@ -4,10 +4,16 @@ import os
 def download_video(url):
     try:
         ydl_opts = {
-            'format': 'bestvideo[height<=480]+bestaudio/best[height<=480]',
+            'format': 'bestvideo[height>=720]+bestaudio/best',  # Get at least 720p quality
             'outtmpl': os.path.join(os.path.expanduser("~"), 'Downloads', '%(title)s.%(ext)s'),
-            'merge_output_format': 'mp4',
-            'noplaylist': True,  # Prevent accidentally downloading entire playlists
+            'merge_output_format': 'mp4',  # Ensures MP4 output
+            'noplaylist': True,  # Prevents downloading playlists
+            'postprocessors': [
+                {
+                    'key': 'FFmpegVideoConvertor',  # Converts final video to MP4
+                    'preferedformat': 'mp4'  # <-- Fix: Correct argument spelling
+                }
+            ]
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -20,6 +26,7 @@ def download_video(url):
 if __name__ == '__main__':
     try:
         # Always update yt-dlp before running
+        print("🔄 Updating yt-dlp...")
         os.system("python -m pip install -U yt-dlp")
 
         number_of_videos = int(input("Enter the number of videos you want to download: "))
@@ -40,3 +47,4 @@ if __name__ == '__main__':
 
     except ValueError:
         print("⚠️ Invalid input! Please enter a valid number.")
+
