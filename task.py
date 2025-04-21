@@ -18,15 +18,15 @@ def download_video(url):
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
-            print(f"✅ Downloaded: {info['title']} to your Downloads folder.")
+            print(f"Downloaded: {info['title']} to your Downloads folder.")
 
     except Exception as e:
-        print(f"⚠️ Error downloading {url}: {e}")
+        print(f"Error downloading {url}: {e}")
 
 if __name__ == '__main__':
     try:
         # Always update yt-dlp before running
-        print("🔄 Updating yt-dlp...")
+        print("Updating yt-dlp...")
         os.system("python -m pip install -U yt-dlp")
 
         number_of_videos = int(input("Enter the number of videos you want to download: "))
@@ -37,9 +37,9 @@ if __name__ == '__main__':
             if url:
                 urls.append(url)
             else:
-                print("⚠️ Empty URL skipped.")
+                print("Empty URL skipped.")
 
-        print("\n🔽 Starting downloads...\n")
+        print("\nStarting downloads...\n")
         for url in urls:
             download_video(url)
 
