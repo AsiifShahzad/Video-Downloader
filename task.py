@@ -43,8 +43,8 @@ if __name__ == '__main__':
         for url in urls:
             download_video(url)
 
-        input("\n✅ All downloads completed! Press Enter to exit.")
+        input("\nAll downloads completed! Press Enter to exit.")
 
     except ValueError:
-        print("⚠️ Invalid input! Please enter a valid number.")
+        print("Invalid input! Please enter a valid number.")
 
